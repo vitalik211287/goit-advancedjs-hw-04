@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vanilla App Template</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <main>
+      <form action="" class="form">
+        <input
+          type="text"
+          name="query"
+          placeholder="Search images..."
+          required
+        />
+        <button type="submit">Search</button>
+      </form>
+      <ul class="gallery js-gallery"></ul>
+      <!-- <ul class="gallery js-gallery"></ul> -->
+
+      <!-- Глобальний індикатор завантаження -->
+      <div
+        id="loader"
+        class="loader is-hidden"
+        aria-live="polite"
+        aria-busy="true"
+      >
+        <div class="lds-roller">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

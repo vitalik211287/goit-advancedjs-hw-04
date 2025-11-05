@@ -1,0 +1,217 @@
+/**
+  |============================
+  | include css partials with
+  | default @import url()
+  |============================
+*/
+/* Common styles */
+@import url('./reset.css');
+@import url('./base.css');
+@import url('./container.css');
+@import url('./animations.css');
+
+/* Sections style */
+@import url('./header.css');
+@import url('./vite-promo.css');
+@import url('./badges.css');
+@import url('./back-link.css');
+@import url('./footer.css');
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* form */
+
+.form {
+  width: 100%;
+  padding: 24px;
+  margin: 20px;
+  display: flex;
+}
+
+.form input::placeholder {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.25;
+}
+
+.form input {
+  box-sizing: border-box; /* 👈 додаємо це */
+  width: 272px;
+  padding: 8px 16px;
+  margin-right: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  resize: none;
+}
+.form input:focus,
+.form input:hover{
+  border: 1px solid #000000;
+}
+
+.form button {
+  display: block;
+  width: 91px;
+  padding: 8px 16px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: Montserrat;
+  gap: 10px;
+  color: white;
+  background-color: #4e75ff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.form button:hover {
+  background-color: #6c8cff;
+  transform: scale(1.02);
+}
+
+.form button:active {
+  transform: scale(0.98);
+}
+
+
+/* gallery */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.gallery-card {
+  width: 350px;
+  /* background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s; */
+}
+
+.gallery-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.gallery-img {
+  transition: all 0.3s ease-in;
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+}
+
+.gallery-image:hover {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  transform: scale(1.03);
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.span_text {
+  font-size: 16px;
+  font-weight: 400;
+}
+.gallery-item {
+  display: block;
+  width: 350px;
+  height: 350px;
+}
+
+.js-gallery{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: baseline;
+  flex-direction: row;
+  align-content: stretch;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* напівпрозорий фон поверх сторінки */
+.loader {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(1px);
+  z-index: 9999;
+}
+
+.is-hidden {
+  display: none;
+}
+
+/* сам спінер — pure CSS (без картинок) */
+.lds-roller {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-roller div {
+  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 40px 40px;
+}
+
+.lds-roller div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2563eb;
+  margin: -4px 0 0 -4px;
+}
+
+.lds-roller div:nth-child(1) { animation-delay: -0.036s; }
+.lds-roller div:nth-child(1):after { top: 63px; left: 63px; }
+.lds-roller div:nth-child(2) { animation-delay: -0.072s; }
+.lds-roller div:nth-child(2):after { top: 68px; left: 56px; }
+.lds-roller div:nth-child(3) { animation-delay: -0.108s; }
+.lds-roller div:nth-child(3):after { top: 71px; left: 48px; }
+.lds-roller div:nth-child(4) { animation-delay: -0.144s; }
+.lds-roller div:nth-child(4):after { top: 72px; left: 40px; }
+.lds-roller div:nth-child(5) { animation-delay: -0.18s; }
+.lds-roller div:nth-child(5):after { top: 71px; left: 32px; }
+.lds-roller div:nth-child(6) { animation-delay: -0.216s; }
+.lds-roller div:nth-child(6):after { top: 68px; left: 24px; }
+.lds-roller div:nth-child(7) { animation-delay: -0.252s; }
+.lds-roller div:nth-child(7):after { top: 63px; left: 17px; }
+.lds-roller div:nth-child(8) { animation-delay: -0.288s; }
+.lds-roller div:nth-child(8):after { top: 56px; left: 12px; }
+
+@keyframes lds-roller {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
