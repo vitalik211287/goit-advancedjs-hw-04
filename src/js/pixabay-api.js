@@ -12,6 +12,7 @@ export function fetchImages(query) {
 
   const url = `${BASE_URL}?${params.toString()}`;
 
+  
   return fetch(url)
     .then(res => {
       if (!res.ok) {
