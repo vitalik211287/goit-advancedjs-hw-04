@@ -15,7 +15,7 @@ const refs = {
 
 refs.searchForm.addEventListener('submit', onSearchSubmit);
 
-function onSearchSubmit(e) {
+async function onSearchSubmit(e) {
   e.preventDefault();
   const { target: searchForm } = e;
   const query = searchForm.elements.query.value.trim();
@@ -27,24 +27,23 @@ function onSearchSubmit(e) {
   refs.gallery.innerHTML = '';
   showLoader();
 
-  fetchImages(query)
-    .then(hits => {
-      renderGallery(refs.gallery, hits);
-    })
-    .catch(err => {
-      if (err.status === 404 || err.status === '404') {
-        iziToast.error({
-          title: '❌ 404 Not Found',
-          message: 'Ресурс не знайдено або не існує.',
-          position: 'topRight',
-        });
-      } else {
-        iziToast.error({
-          title: '⚠️ Помилка запиту',
-          message: err?.message || 'Виникла мережева або інша помилка.',
-          position: 'topRight',
-        });
-      }
-    })
-    .finally(() => hideLoader());
+  try {
+    const { data } = await fetchImages(query);
+    console.log(data);
+    renderGallery(refs.gallery, data.hits);
+  } catch (err) {
+    if (err.status === 404 || err.status === '404') {
+      iziToast.error({
+        title: '❌ 404 Not Found',
+        message: 'Ресурс не знайдено або не існує.',
+        position: 'topRight',
+      });
+    } else {
+      iziToast.error({
+        title: '⚠️ Помилка запиту',
+        message: err?.message || 'Виникла мережева або інша помилка.',
+        position: 'topRight',
+      });
+    }
+  }
 }
