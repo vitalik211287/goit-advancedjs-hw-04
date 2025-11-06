@@ -4,11 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vanilla App Template</title>
+
     <link rel="stylesheet" href="./css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/loaders.css@0.1.2/loaders.min.css"
+    />
   </head>
   <body>
     <main>
-      <form action="" class="form">
+      <form class="form">
         <input
           type="text"
           name="query"
@@ -17,17 +22,15 @@
         />
         <button type="submit">Search</button>
       </form>
-      <ul class="gallery js-gallery"></ul>
-      <!-- <ul class="gallery js-gallery"></ul> -->
 
-      <!-- Глобальний індикатор завантаження -->
-      <div
+      <ul class="gallery js-gallery"></ul>
+      <span
         id="loader"
-        class="loader is-hidden"
+        class="loader loader-overlay is-hidden"
         aria-live="polite"
         aria-busy="true"
       >
-        <div class="lds-roller">
+        <div class="ball-spin-fade-loader">
           <div></div>
           <div></div>
           <div></div>
@@ -37,8 +40,9 @@
           <div></div>
           <div></div>
         </div>
-      </div>
+      </span>
     </main>
+
     <script type="module" src="./main.js"></script>
   </body>
 </html>

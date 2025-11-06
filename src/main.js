@@ -24,6 +24,7 @@ function onSearchSubmit(e) {
     return;
   }
 
+  refs.gallery.innerHTML = '';
   showLoader();
 
   fetchImages(query)
@@ -45,5 +46,5 @@ function onSearchSubmit(e) {
         });
       }
     })
-    .finally(() => hideLoader()); 
+    .finally(() => hideLoader());
 }
