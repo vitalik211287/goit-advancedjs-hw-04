@@ -45,5 +45,7 @@ async function onSearchSubmit(e) {
         position: 'topRight',
       });
     }
+  } finally {
+    hideLoader();
   }
 }
