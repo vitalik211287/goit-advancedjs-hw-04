@@ -1,5 +1,8 @@
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import SimpleLightbox from 'simplelightbox';
+import { refs } from '../main.js';
+
+
 
 export function createGalleryCardTemplate({
   downloads,
@@ -53,4 +56,16 @@ export function showLoader() {
 export function hideLoader() {
   const el = document.getElementById('loader');
   if (el) el.classList.add('is-hidden');
+}
+
+export function showBtm() {
+  if (refs.loadBtm) refs.loadBtm.classList.remove('is-hidden');
+}
+
+
+export function appendGallery(containerEl, data) {
+  if (!data?.length) return;
+  const html = data.map(createGalleryCardTemplate).join('');
+  containerEl.insertAdjacentHTML('beforeend', html);
+  // якщо використовуєш SimpleLightbox — не забудь refresh()
 }

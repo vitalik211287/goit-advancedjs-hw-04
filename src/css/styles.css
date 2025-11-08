@@ -54,13 +54,14 @@ body {
   resize: none;
 }
 .form input:focus,
-.form input:hover{
+.form input:hover {
   border: 1px solid #000000;
 }
 
-.form button {
+.form button,
+.load-btm {
   display: block;
-  width: 91px;
+  width: auto;
   padding: 8px 16px;
   font-size: 15px;
   font-weight: 500;
@@ -74,15 +75,22 @@ body {
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-.form button:hover {
+.load-btm {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+}
+
+.form button:hover,
+.load-btm:hover {
   background-color: #6c8cff;
   transform: scale(1.02);
 }
 
-.form button:active {
+.form button:active,
+.load-btm {
   transform: scale(0.98);
 }
-
 
 /* gallery */
 
@@ -97,16 +105,11 @@ body {
 
 .gallery-card {
   width: 350px;
-  /* background: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-  transition: transform 0.2s, box-shadow 0.2s; */
 }
 
 .gallery-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .gallery-img {
@@ -144,7 +147,7 @@ body {
   height: 350px;
 }
 
-.js-gallery{
+.js-gallery {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -167,11 +170,9 @@ body {
   display: none;
 }
 
-
 #loader .ball-spin-fade-loader {
   color: #2563eb;
 }
-
 
 #loader .ball-spin-fade-loader > div {
   background-color: currentColor;

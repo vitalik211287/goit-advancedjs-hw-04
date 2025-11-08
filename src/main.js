@@ -5,15 +5,22 @@ import {
   renderGallery,
   showLoader,
   hideLoader,
+  showBtm,
+  appendGallery,
 } from './js/render-functions.js';
 
-const refs = {
+export const refs = {
   searchForm: document.querySelector('form.form'),
   queryInput: document.querySelector('form.form [name="query"]'),
   gallery: document.querySelector('.js-gallery'),
+  loadBtm: document.querySelector('.load-btm'),
 };
 
 refs.searchForm.addEventListener('submit', onSearchSubmit);
+refs.loadBtm.addEventListener('click', onLoadMoreBtnClick);
+
+let pageX = 1;
+let currentQuery = '';
 
 async function onSearchSubmit(e) {
   e.preventDefault();
@@ -24,13 +31,15 @@ async function onSearchSubmit(e) {
     return;
   }
 
+  currentQuery = query;
+  pageX = 1;
   refs.gallery.innerHTML = '';
   showLoader();
 
   try {
-    const { data } = await fetchImages(query);
-    console.log(data);
+    const { data } = await fetchImages(currentQuery, pageX);
     renderGallery(refs.gallery, data.hits);
+    showBtm();
   } catch (err) {
     if (err.status === 404 || err.status === '404') {
       iziToast.error({
@@ -45,6 +54,24 @@ async function onSearchSubmit(e) {
         position: 'topRight',
       });
     }
+  } finally {
+    hideLoader();
+  }
+}
+
+export async function onLoadMoreBtnClick() {
+  if (!currentQuery) return;
+  pageX++;
+  showLoader();
+  try {
+    const { data } = await fetchImages(currentQuery, pageX);
+    appendGallery(refs.gallery, data.hits);
+  } catch (err) {
+    iziToast.error({
+      title: '⚠️ Помилка запиту',
+      message: err?.message || 'Виникла мережева або інша помилка.',
+      position: 'topRight',
+    });
   } finally {
     hideLoader();
   }
