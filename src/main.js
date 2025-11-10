@@ -8,6 +8,12 @@ import {
   appendGallery,
 } from './js/render-functions.js';
 
+const refs = {
+  searchForm: document.querySelector('form.form'),
+  gallery: document.querySelector('.js-gallery'),
+  loadBtm: document.querySelector('.load-btm'),
+};
+
 function showBtm() {
   if (refs.loadBtm) refs.loadBtm.classList.remove('is-hidden');
 }
@@ -16,15 +22,8 @@ function hideBtm() {
   if (refs.loadBtm) refs.loadBtm.classList.add('is-hidden');
 }
 
-const refs = {
-  searchForm: document.querySelector('form.form'),
-  queryInput: document.querySelector('form.form [name="query"]'),
-  gallery: document.querySelector('.js-gallery'),
-  loadBtm: document.querySelector('.load-btm'),
-};
-
 refs.searchForm.addEventListener('submit', onSearchSubmit);
-refs.loadBtm.addEventListener('click', onLoadMoreBtnClick);
+// refs.loadBtm.addEventListener('click', onLoadMoreBtnClick);
 
 let pageX = 1;
 let currentQuery = '';
@@ -33,6 +32,8 @@ let totalAvailable = 0;
 
 async function onSearchSubmit(e) {
   e.preventDefault();
+  refs.loadBtm.removeEventListener('click', onLoadMoreBtnClick);
+  refs.loadBtm.addEventListener('click', onLoadMoreBtnClick);
   const { target: searchForm } = e;
   const query = searchForm.elements.query.value.trim();
   if (query.length === 0) {
@@ -76,7 +77,7 @@ async function onSearchSubmit(e) {
       hideBtm();
     }
   } catch (err) {
-    if (err.status === 404 || err.status === '404') {
+    if (err.response.status === 404 || err.response.status === '404') {
       iziToast.error({
         title: '❌ 404 Not Found',
         message: 'The requested resource was not found or does not exist.',
