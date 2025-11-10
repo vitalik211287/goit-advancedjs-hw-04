@@ -1,8 +1,5 @@
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import SimpleLightbox from 'simplelightbox';
-import { refs } from '../main.js';
-
-
 
 export function createGalleryCardTemplate({
   downloads,
@@ -28,24 +25,27 @@ export function createGalleryCardTemplate({
 `;
 }
 
+let lightbox = null;
+
+function ensureLightbox() {
+  if (!lightbox) {
+    lightbox = new SimpleLightbox('.js-gallery a.gallery-item', {
+      captionsData: 'alt',
+      captionDelay: 250,
+    });
+  } else {
+    lightbox.refresh();
+  }
+}
+
 export function renderGallery(containerEl, hits) {
   if (!hits?.length) {
-    iziToast.info({
-      title: 'Info',
-      message:
-        'Sorry, there are no images matching your search query. Please try again!',
-      position: 'topRight',
-    });
     containerEl.innerHTML = '';
-    return;
+    return false;
   }
   containerEl.innerHTML = hits.map(createGalleryCardTemplate).join('');
-
-  const lightbox = new SimpleLightbox('.js-gallery .gallery-item', {
-    captionsData: 'alt',
-    captionDelay: 250,
-  });
-  lightbox.refresh();
+  ensureLightbox();
+  return true;
 }
 
 export function showLoader() {
@@ -58,14 +58,9 @@ export function hideLoader() {
   if (el) el.classList.add('is-hidden');
 }
 
-export function showBtm() {
-  if (refs.loadBtm) refs.loadBtm.classList.remove('is-hidden');
-}
-
-
 export function appendGallery(containerEl, data) {
   if (!data?.length) return;
   const html = data.map(createGalleryCardTemplate).join('');
   containerEl.insertAdjacentHTML('beforeend', html);
-  // якщо використовуєш SimpleLightbox — не забудь refresh()
+  ensureLightbox();
 }
