@@ -54,7 +54,7 @@ async function onSearchSubmit(e) {
   hideBtm();
 
   try {
-    const { data } = await fetchImages(currentQuery, pageX);
+    const  data  = await fetchImages(currentQuery, pageX);
     totalAvailable = data.totalHits ?? 0;
 
     const hasResults = renderGallery(refs.gallery, data.hits);
@@ -100,7 +100,7 @@ export async function onLoadMoreBtnClick() {
   pageX++;
   showLoader();
   try {
-    const { data } = await fetchImages(currentQuery, pageX);
+    const data = await fetchImages(currentQuery, pageX);
 
     appendGallery(refs.gallery, data.hits);
     totalLoaded += data.hits.length;
