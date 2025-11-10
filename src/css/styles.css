@@ -104,21 +104,12 @@ main {
 
 /* gallery */
 
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
 .gallery-card {
   width: 350px;
 }
 
 .gallery-card:hover {
-  transform: translateY(-3px);
+  transform: scale(1.03); ;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
@@ -129,12 +120,12 @@ main {
   object-fit: cover;
 }
 
-.gallery-image:hover {
+/* .gallery-image:hover {
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
   transform: scale(1.03);
-}
+} */
 
 .info {
   display: flex;
@@ -166,6 +157,7 @@ main {
   align-content: stretch;
   justify-content: space-between;
   align-items: center;
+  gap: 25px;
 }
 
 .loader-overlay {
